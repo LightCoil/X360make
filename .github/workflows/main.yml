@@ -1,14 +1,38 @@
-- name: 🛠 Build x360make.exe
-  shell: cmd
-  run: |
-    cl /EHsc /Fe:x360make.exe ^
-      /I include ^
-      src\main.cpp ^
-      src\gui.cpp ^
-      src\core_build.cpp ^
-      src\locale.cpp ^
-      src\logger.cpp ^
-      src\downloader.cpp ^
-      src\unzip.cpp ^
-      src\packer.cpp ^
-      user32.lib shell32.lib wininet.lib shlwapi.lib
+name: Build x360make
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v3
+
+    - name: ⚙️ Set up MSVC environment
+      uses: ilammy/msvc-dev-cmd@v1
+
+    - name: 🛠 Build x360make.exe
+      shell: cmd
+      run: |
+        cl /EHsc /Fe:x360make.exe ^
+          /I include ^
+          src\main.cpp ^
+          src\gui.cpp ^
+          src\core_build.cpp ^
+          src\locale.cpp ^
+          src\logger.cpp ^
+          src\downloader.cpp ^
+          src\unzip.cpp ^
+          src\packer.cpp ^
+          user32.lib shell32.lib wininet.lib shlwapi.lib
+
+    - name: 📦 Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: x360make.exe
+        path: x360make.exe
