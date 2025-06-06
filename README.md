@@ -101,8 +101,7 @@ Then open `x360make.sln` in Visual Studio 2019 or 2022.
 - ✅ Full GUI progress tracking with thread-safe updates  
 - ⬜ Real digital signature verification using `WinVerifyTrust`  
 - ⬜ Optional offline build with drag-and-drop folder support  
-- ⬜ Custom build profiles (release/debug, optimization flags)  
-- ⬜ Built-in disassembler/debugger frontend  
+
 
 ---
 
